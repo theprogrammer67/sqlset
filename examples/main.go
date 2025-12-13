@@ -19,14 +19,14 @@ func main() {
 	}
 
 	// Get a specific query
-	query, err := sqlSet.GetQuery("users", "GetUserByID")
+	query, err := sqlSet.Get("users", "GetUserByID")
 	if err != nil {
 		log.Fatalf("Failed to get query: %v", err)
 	}
 	fmt.Println("GetUserByID query:", query)
 
 	// Or, panic if the query is not found
-	query = sqlSet.MustGetQuery("users", "CreateUser")
+	query = sqlSet.MustGet("users", "CreateUser")
 	fmt.Println("CreateUser query:", query)
 
 	// You can also retrieve metadata for all query sets

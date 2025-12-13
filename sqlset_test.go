@@ -66,10 +66,10 @@ func TestSQLSet(t *testing.T) {
 	}
 
 	for _, test := range queryTests {
-		t.Run("GetQuery "+test.setID+":"+test.queryID, func(t *testing.T) {
+		t.Run("Get "+test.setID+":"+test.queryID, func(t *testing.T) {
 			t.Parallel()
 
-			query, err := set.GetQuery(test.setID, test.queryID)
+			query, err := set.Get(test.setID, test.queryID)
 
 			if test.expectedFound {
 				require.NoError(t, err)
@@ -80,13 +80,13 @@ func TestSQLSet(t *testing.T) {
 			assert.Equal(t, test.expected, query)
 		})
 
-		t.Run("MustGetQuery "+test.setID+":"+test.queryID, func(t *testing.T) {
+		t.Run("MustGet "+test.setID+":"+test.queryID, func(t *testing.T) {
 			t.Parallel()
 
 			var query string
 
 			fn := func() {
-				query = set.MustGetQuery(test.setID, test.queryID)
+				query = set.MustGet(test.setID, test.queryID)
 			}
 
 			if test.expectedFound {

@@ -9,12 +9,12 @@ import "fmt"
 
 // SQLQueriesProvider is the interface for getting SQL queries.
 type SQLQueriesProvider interface {
-	// GetQuery returns a query by set ID and query ID.
+	// Get returns a query by set ID and query ID.
 	// If the set or query is not found, it returns an error.
-	GetQuery(setID string, queryID string) (string, error)
-	// MustGetQuery returns a query by set ID and query ID.
+	Get(setID string, queryID string) (string, error)
+	// MustGet returns a query by set ID and query ID.
 	// It panics if the set or query is not found.
-	MustGetQuery(setID string, queryID string) string
+	MustGet(setID string, queryID string) string
 }
 
 // SQLSetsProvider is the interface for getting information about query sets.
@@ -30,15 +30,15 @@ type SQLSet struct {
 	sets map[string]QuerySet
 }
 
-// GetQuery retrieves a specific SQL query by its set ID and query ID.
+// Get retrieves a specific SQL query by its set ID and query ID.
 // It returns an error if the query set or the query itself cannot be found.
-func (s *SQLSet) GetQuery(setID string, queryID string) (string, error) {
+func (s *SQLSet) Get(setID string, queryID string) (string, error) {
 	return s.findQuery(setID, queryID)
 }
 
-// MustGetQuery is like GetQuery but panics if the query set or query is not found.
+// MustGet is like Get but panics if the query set or query is not found.
 // This is useful for cases where the query is expected to exist and its absence is a critical error.
-func (s *SQLSet) MustGetQuery(setID string, queryID string) string {
+func (s *SQLSet) MustGet(setID string, queryID string) string {
 	q, err := s.findQuery(setID, queryID)
 	if err != nil {
 		panic(err)
